@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [GitHub]([https://your-solution-url.com](https://github.com/WarlockJa/fm-newsletter-signup))
-- Live Site URL: [Vercel]([https://your-live-site-url.com](https://fm-newsletter-signup.vercel.app/))
+- Solution URL: [GitHub](https://github.com/WarlockJa/fm-newsletter-signup))
+- Live Site URL: [Vercel](https://fm-newsletter-signup.vercel.app/))
 
 ## My process
 
