@@ -1,0 +1,304 @@
+@use "./media.scss";
+
+.nl {
+  background-color: var(--clr-bg-main);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+
+  .nl__formsWrapper {
+    width: 100%;
+    .nl__bgImage {
+      background-image: url("../assets/images/illustration-sign-up-mobile.svg");
+      height: 13em;
+
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 0 0 16px 16px;
+    }
+
+    // hiding empty scrollbars appearing in chrome when using overflow: scroll
+    .nl__form::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nl__form {
+      padding: 1.5em;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 13em);
+
+      .nl__form__header {
+        margin: 0.4em 0;
+        font-size: 2.5rem;
+        font-weight: 400;
+      }
+
+      .nl__form__subheader {
+        font-size: 1rem;
+        font-weight: normal;
+        line-height: 1.5em;
+        margin: 1.5em 0;
+
+        .nl__textBold {
+          font-weight: 700;
+        }
+      }
+
+      .nl__form__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .nl__form__listItem {
+          display: flex;
+          gap: 0.6em;
+          margin-top: 0.6em;
+
+          .nl__form__listItemImageWrapper {
+            // image proportions
+            min-width: calc(21px + 0.5em);
+            height: 21px;
+
+            .nl__form__iconImage {
+              background-image: url("../assets/images/icon-list.svg");
+              background-repeat: no-repeat;
+
+              height: 100%;
+            }
+          }
+
+          .nl__form__listItemP {
+            margin: 0;
+            line-height: 1.5em;
+          }
+        }
+      }
+
+      .nl__form__inputWrapper {
+        display: flex;
+        flex-direction: column;
+        margin: 2.5em 0 1.5em 0;
+
+        .nl__form__inputLabels {
+          display: flex;
+          justify-content: space-between;
+          .nl__form__inputLabel {
+            font-size: 0.8rem;
+            margin-bottom: 0.8em;
+            cursor: pointer;
+          }
+          .nl__form__inputError {
+            font-size: 0.8rem;
+            margin: 0;
+            color: var(--Tomato);
+          }
+        }
+
+        .nl__form__input {
+          padding: 1em;
+          border-radius: 8px;
+          background-color: transparent;
+          outline: transparent;
+          border: 1px solid var(--CharcoalGrey);
+          transition: border 300ms ease;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+        .nl__form__input:hover,
+        .nl__form__input:focus {
+          border: 1px solid var(--Grey);
+        }
+
+        .inputIncorrect,
+        .inputIncorrect:hover,
+        .inputIncorrect:focus {
+          border: 1px solid var(--Tomato);
+        }
+      }
+
+      .nl__form__button {
+        margin-top: auto;
+
+        color: var(--clr-btn-color);
+        position: relative;
+        padding: 1em;
+        font-size: 1rem;
+        font-weight: 700;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        outline: transparent;
+        cursor: pointer;
+        background-color: var(--DarkSlateGrey);
+        transition: background 300ms linear;
+      }
+      .nl__form__button::before {
+        background: linear-gradient(
+          90deg,
+          var(--NotProvidedByTheBloodyDesign),
+          var(--Tomato)
+        );
+        opacity: 0;
+        padding: 1em;
+        transition: opacity 300ms linear;
+        content: "Subscribe to monthly newsletter";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        filter: drop-shadow(0 10px 16px var(--clr-btn-dropShadow));
+      }
+      .nl__form__buttonSuccess::before {
+        content: "Dismiss message";
+      }
+      .nl__form__button:hover {
+        background-color: transparent;
+      }
+      .nl__form__button:focus::before,
+      .nl__form__button:hover::before {
+        opacity: 1;
+      }
+    }
+
+    .nl__formSuccess {
+      min-height: 100vh;
+      .nl__successIcon {
+        background-image: url("../assets/images/icon-success.svg");
+        height: 4em;
+        width: 4em;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: 6em 0 3em 0;
+      }
+    }
+  }
+}
+
+@include media.min-width(medium) {
+  .nl {
+    background-color: var(--DarkSlateGrey);
+
+    .nl__formsWrapper {
+      border-radius: 25px;
+      padding: 1em;
+
+      position: relative;
+
+      display: flex;
+      flex-direction: row-reverse;
+      // setting a fixed ratio for the frame
+      // 16:10 ratio
+      height: 62.5vw;
+      width: 100%;
+      // 16:10 ratio
+      max-width: 960px;
+      max-height: 600px;
+
+      background-color: var(--clr-bg-main);
+
+      .nl__bgImage {
+        // calculating exact offset based on the given picture dimensions
+        // picture's width realtive to its height is 67.45% (400px to 593px)
+        // given frame's ratio 16:10, the width needed by the picture to keep its dimensions is
+        // pictureWidth = 0.6745 * 0.625 * frameWidth = 0.4216 frameWidth
+        // plus padding offset for top and bottom of 0.5em
+        width: calc(42.16% - 0.5em);
+        height: 100%;
+        background-image: url("../assets/images/illustration-sign-up-desktop.svg");
+        background-size: contain;
+
+        border-radius: 0;
+      }
+
+      .nl__form {
+        // calculating width for stepForm within the frame by removing
+        // calculated width of the header picture
+        width: calc(100% - 42.16%);
+        overflow-y: scroll;
+
+        padding: clamp(0em, 2vw, 3em) clamp(2em, 5vw, 4em) 0
+          clamp(1em, 3vw, 2em);
+        min-height: 0;
+
+        .nl__form__button {
+          margin: 0;
+        }
+
+        .nl__form__header {
+          font-size: clamp(1.5rem, 5vw, 3.5rem);
+          margin: clamp(0em, 1vw, 0.4em) 0;
+          font-weight: 600;
+        }
+
+        .nl__form__subheader {
+          margin: clamp(0em, 1vw, 1.5em) 0;
+        }
+
+        .nl__form__list {
+          gap: clamp(0em, 1vw, 0.6em);
+
+          .nl__form__listItem {
+            margin-top: clamp(0em, 1vw, 0.6em);
+            gap: clamp(0em, 1vw, 0.6em);
+
+            .nl__form__listItemP {
+              line-height: clamp(0em, 2.5vw, 1.5em);
+            }
+          }
+        }
+
+        .nl__form__inputWrapper {
+          margin: clamp(0em, 3vw, 2.5em) 0 clamp(0em, 2vw, 1.5em) 0;
+
+          .nl__form__input {
+            padding: clamp(0.5em, 2vw, 1em);
+          }
+        }
+
+        .nl__form__button {
+          padding: clamp(0.5em, 2vw, 1em);
+        }
+        .nl__form__button::before {
+          padding: clamp(0.5em, 2vw, 1em);
+        }
+      }
+
+      .nl__formSuccess {
+        min-height: 0;
+
+        .nl__successIcon {
+          margin: 0;
+        }
+      }
+    }
+
+    .nl__formsWrapperSuccess {
+      width: 32em;
+      height: 32em;
+      border-radius: 40px;
+
+      .nl__form {
+        width: 100%;
+        padding: 2em 3em;
+
+        .nl__form__header {
+          margin: 0.8em 0 0.3em 0;
+          font-size: 3rem;
+        }
+
+        .nl__form__button {
+          margin-top: auto;
+        }
+      }
+    }
+  }
+}
